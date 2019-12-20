@@ -48,5 +48,38 @@ namespace Tycoon.Areas.Admin.Controllers
             }
 
         }
+
+        // GET - EDIT
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var category = await db.Category.FindAsync(id);
+
+                if(category == null)
+                {
+                    return NotFound();
+                }
+                return View(category);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Update(category);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }
     }
 }

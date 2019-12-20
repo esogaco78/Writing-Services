@@ -181,3 +181,6 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateButton
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Create.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateAndBackToListPartial.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TableButtonsPartial.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.cache
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Edit.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UpdateAndBackToListPartial.cshtml.g.cs
