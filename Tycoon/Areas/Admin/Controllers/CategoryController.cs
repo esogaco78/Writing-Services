@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tycoon.Data;
+using Tycoon.Models;
 
 namespace Tycoon.Areas.Admin.Controllers
 {
@@ -27,6 +28,25 @@ namespace Tycoon.Areas.Admin.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        //Post - Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Category.Add(category);
+                await db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(category);
+            }
+
         }
     }
 }
