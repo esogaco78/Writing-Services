@@ -138,7 +138,6 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\Privacy.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\_ViewImports.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\_ViewStart.cshtml.g.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.cache
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\AccessDenied.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml.g.cs
@@ -177,3 +176,7 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Accou
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Error.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateButtonPartial.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Create.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateAndBackToListPartial.cshtml.g.cs
