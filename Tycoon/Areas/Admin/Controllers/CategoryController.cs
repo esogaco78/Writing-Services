@@ -75,11 +75,64 @@ namespace Tycoon.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(category);
+                db.Category.Update(category);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
+
+        //GET - DELETE
+        public async Task <IActionResult> Delete(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var category = await db.Category.FindAsync(id);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+                return View(category);
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+            var category = await db.Category.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            db.Category.Remove(category);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        //GET - Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var category = await db.Category.FindAsync(id);
+
+                if (category == null)
+                {
+                    return NotFound();
+                }
+                return View(category);
+            }
+
+        }
+
     }
 }
