@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="https://kit.fontawesome.com/398a7dec8f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/xrfiuk4xpuuowrdbhs77w6cguny905h5d0cbg45q8h1t58b2/tinymce/5/tinymce.min.js"></script>
 </head>
 <body class="search-background">
     <header>
@@ -36,7 +37,10 @@
                                    asp-action="Index" 
                                    asp-controller="SubCategory"
                                    asp-area="Admin">Sub Category</a>
-                                <a class="dropdown-item">Services</a>
+                                <a class="dropdown-item"
+                                   asp-action="Index" 
+                                   asp-controller="Service"
+                                   asp-area="Admin">Services</a>
                                 <a class="dropdown-item">Coupons</a>
                                 <a class="dropdown-item">Users</a>
                             </div>

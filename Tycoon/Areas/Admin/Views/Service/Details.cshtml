@@ -1,0 +1,126 @@
+﻿
+@model Tycoon.Models.ViewModels.ServiceViewModel
+@using Tycoon.Extensions
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info"> @Model.Service.Name Service Deatils</h2>
+<br />
+<form method="post" enctype="multipart/form-data" asp-action="Details">
+    <div class="border backgroundwhite row">
+        <input type="hidden" asp-for=" Service.Id" />
+        <div class="col-8">
+            <fieldset disabled>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Service.Name" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Service.Name" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Service.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Service.Description" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        @Html.TextAreaFor(m => m.Service.Description)
+                    </div>
+                    <span asp-validation-for="Service.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Service.Price" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Service.Price" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Service.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Service.CategoryId" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" asp-for="Service.Category.Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Service.SubCategoryId" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" asp-for="Service.SubCategory.Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Service.Popularity" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Service.Popularity"
+                                asp-items="Html.GetEnumSelectList<Service.EDemand>()"
+                                class="form-control"></select>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-3 offset-1">
+            <img src="@Model.Service.Image" width="100%"
+                 style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+        </div>
+        <div class="col-8">
+            <div class="col-8 offset-4">
+                <partial name="_DeatilsAndBackToListPartial" model="@Model.Service.Id" />
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts{
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
+            menubar: 'file edit format',
+            readonly: 1
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            getSubCategory();
+            $('#CategoryId').change(function () {
+                getSubCategory();
+            });
+
+        });
+
+        function getSubCategory() {
+            var url = '@Url.Content("~/")' + "Admin/SubCategory/GetSubCategory";
+            var ddlsource = '#CategoryId';
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var services = '';
+                $('#SubCategoryId').empty();
+                $.each(data, function (i, subCategory) {
+                    services += "<option value='" + subCategory.value + "'> "
+                        + subCategory.text + "</option>";
+                });
+
+                $('#SubCategoryId').html(services);
+            })
+        }
+    </script>
+
+}
+

@@ -127,8 +127,6 @@ D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Tycoon.dll
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Tycoon.pdb
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Tycoon.Views.dll
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Tycoon.Views.pdb
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.Views.pdb
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.dll
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.pdb
@@ -181,7 +179,6 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateButton
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Create.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateAndBackToListPartial.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TableButtonsPartial.cshtml.g.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.cache
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Edit.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UpdateAndBackToListPartial.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Delete.cshtml.g.cs
@@ -194,3 +191,11 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_StatusMessag
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\SubCategory\Edit.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\SubCategory\Details.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\SubCategory\Delete.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Service\Index.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Service\Create.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.cache
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Service\Edit.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Service\Details.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Service\Delete.cshtml.g.cs

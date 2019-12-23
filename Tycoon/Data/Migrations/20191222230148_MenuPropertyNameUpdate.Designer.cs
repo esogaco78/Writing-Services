@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tycoon.Data;
 
 namespace Tycoon.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191222230148_MenuPropertyNameUpdate")]
+    partial class MenuPropertyNameUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,7 +237,7 @@ namespace Tycoon.Data.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Tycoon.Models.Service", b =>
+            modelBuilder.Entity("Tycoon.Models.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,7 +272,7 @@ namespace Tycoon.Data.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("Service");
+                    b.ToTable("MenuItem");
                 });
 
             modelBuilder.Entity("Tycoon.Models.SubCategory", b =>
@@ -345,7 +347,7 @@ namespace Tycoon.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tycoon.Models.Service", b =>
+            modelBuilder.Entity("Tycoon.Models.MenuItem", b =>
                 {
                     b.HasOne("Tycoon.Models.Category", "Category")
                         .WithMany()
