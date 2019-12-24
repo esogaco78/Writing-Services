@@ -22,7 +22,6 @@ namespace Tycoon.Models
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
-        [Required]
         [Display(Name = "SubCategory")]
         public int SubCategoryId { get; set; }
 

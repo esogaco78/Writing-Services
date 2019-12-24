@@ -48,7 +48,6 @@ namespace Tycoon.Areas.Admin.Controllers
         //POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1827:Do not use Count() or LongCount() when Any() can be used", Justification = "<Pending>")]
         public async Task<IActionResult> Create(SubCategoryAndCategoryViewModel model)
         {
             if (ModelState.IsValid)
