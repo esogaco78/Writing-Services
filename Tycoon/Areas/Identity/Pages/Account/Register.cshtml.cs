@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Tycoon.Models;
+using Tycoon.Utility;
 
 namespace Tycoon.Areas.Identity.Pages.Account
 {
@@ -23,17 +25,20 @@ namespace Tycoon.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -60,6 +65,20 @@ namespace Tycoon.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+            public string StreetAddress { get; set; }
+            public string PhoneNumber { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string PostalCode { get; set; }
+
+
+
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -70,17 +89,74 @@ namespace Tycoon.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            string role = Request.Form["rdUserRole"].ToString();
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new AppUser 
+                { 
+                    UserName = Input.Email, 
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    StreetAddress = Input.StreetAddress,
+                    City = Input.City,
+                    State = Input.State,
+                    PostalCode = Input.PostalCode,
+                    PhoneNumber = Input.PhoneNumber
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if(!await _roleManager.RoleExistsAsync(StaticDetail.CustomerEndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetail.CustomerEndUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(StaticDetail.ManagerUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetail.ManagerUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(StaticDetail.CustomerSupportUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetail.CustomerSupportUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(StaticDetail.WritingUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetail.WritingUser));
+                    }
+
+                    if (role == StaticDetail.WritingUser)
+                    {
+                        await _userManager.AddToRoleAsync(user, StaticDetail.WritingUser);
+                    }
+                    else
+                    {
+                        if (role == StaticDetail.CustomerSupportUser)
+                        {
+                            await _userManager.AddToRoleAsync(user, StaticDetail.CustomerSupportUser);
+                        }
+                        else
+                        {
+                            if(role == StaticDetail.ManagerUser)
+                            {
+                                await _userManager.AddToRoleAsync(user, StaticDetail.ManagerUser);
+                            }
+                            else
+                            {
+                                await _userManager.AddToRoleAsync(user, StaticDetail.CustomerEndUser);
+                                await _signInManager.SignInAsync(user, isPersistent: false);
+                                return LocalRedirect(returnUrl);
+                            }
+                        }
+                           
+                    }
+
+                    return RedirectToAction("Index", "User", new { area= "Admin"} );
+
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    /*var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -96,10 +172,10 @@ namespace Tycoon.Areas.Identity.Pages.Account
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                     }
                     else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    {*/
+                        
+                      
+                   /* }*/
                 }
                 foreach (var error in result.Errors)
                 {

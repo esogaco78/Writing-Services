@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-Tycoon-045F8973-2C20-44F1-A3BF-0E3D4800EC65</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20191224014104_AddChangesToUserModel.cs" />
+    <Compile Remove="Data\Migrations\20191224014104_AddChangesToUserModel.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
@@ -19,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

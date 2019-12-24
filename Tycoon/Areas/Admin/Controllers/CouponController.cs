@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tycoon.Data;
 using Tycoon.Models;
+using Tycoon.Utility;
 
 namespace Tycoon.Areas.Admin.Controllers
 {
+    [Authorize(Roles = StaticDetail.ManagerUser)]
     [Area("Admin")]
     public class CouponController : Controller
     {

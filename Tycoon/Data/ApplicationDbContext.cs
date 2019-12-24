@@ -18,5 +18,8 @@ namespace Tycoon.Data
         public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<Service> Service { get; set; }
         public DbSet<Coupon> Coupon { get; set; }
+
+        public DbSet<AppUser> AppUser { get; set; }
+    
     }
 }
