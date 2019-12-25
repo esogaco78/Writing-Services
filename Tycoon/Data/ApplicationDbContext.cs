@@ -20,6 +20,7 @@ namespace Tycoon.Data
         public DbSet<Coupon> Coupon { get; set; }
 
         public DbSet<AppUser> AppUser { get; set; }
-    
+        public DbSet<Cart> Cart { get; set; }
+
     }
 }

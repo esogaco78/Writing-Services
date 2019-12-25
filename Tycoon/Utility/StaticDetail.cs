@@ -12,6 +12,7 @@ namespace Tycoon.Utility
         public const string WritingUser = "Writer";
         public const string CustomerSupportUser = "Customer Support";
         public const string CustomerEndUser = "Customer";
+        public const string ssServicesCount = "ssServicesCount";
 
     }
 }

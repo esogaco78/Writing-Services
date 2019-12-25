@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Tycoon.Data;
+using Microsoft.EntityFrameworkCore;
+using Tycoon.Models;
+using Microsoft.AspNetCore.Http;
+using Tycoon.Utility;
 
 namespace Tycoon.Areas.Identity.Pages.Account
 {
@@ -20,14 +25,16 @@ namespace Tycoon.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext db;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, ApplicationDbContext appDb)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            db = appDb;
         }
 
         [BindProperty]
@@ -82,6 +89,14 @@ namespace Tycoon.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
+                    var loggedInUser = await db.Users
+                        .Where(u => u.Email == Input.Email).FirstOrDefaultAsync();
+
+                    List<Cart> listOfServices = await db.Cart
+                        .Where(u => u.UserId == loggedInUser.Id).ToListAsync();
+
+                    HttpContext.Session.SetInt32(StaticDetail.ssServicesCount, listOfServices.Count);
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

@@ -1,4 +1,6 @@
 ﻿@using Tycoon.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,11 +58,25 @@
                                 </div>
                             </li>
                         }
-                        <li class="text-black-50" >
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-shopping-cart"></i> &nbsp; (0)
-                            </a>
-                        </li>
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32(@StaticDetail.ssServicesCount) != null)
+                        {
+                            <li class="text-black-50">
+                                <a href="#" class="nav-link">
+                                    @{
+                                        var count = HttpContextAccessor.HttpContext.Session.GetInt32(@StaticDetail.ssServicesCount);
+                                    }
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="text-black-50">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
