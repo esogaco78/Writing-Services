@@ -61,7 +61,9 @@
                         @if (HttpContextAccessor.HttpContext.Session.GetInt32(@StaticDetail.ssServicesCount) != null)
                         {
                             <li class="text-black-50">
-                                <a href="#" class="nav-link">
+                                <a asp-area="Customer"
+                                   asp-controller="Cart"
+                                  asp-action="Index"  class ="nav-link">
                                     @{
                                         var count = HttpContextAccessor.HttpContext.Session.GetInt32(@StaticDetail.ssServicesCount);
                                     }
