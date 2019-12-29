@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tycoon.Models;
 
 namespace Tycoon.Utility
 {
@@ -13,6 +14,8 @@ namespace Tycoon.Utility
         public const string CustomerSupportUser = "Customer Support";
         public const string CustomerEndUser = "Customer";
         public const string ssServicesCount = "ssServicesCount";
+		public const string ssCouponCode = "ssCouponCode";
+
 
 		public static string ConvertToRawHtml(string source)
 		{
@@ -40,6 +43,41 @@ namespace Tycoon.Utility
 				}
 			}
 			return new string(array, 0, arrayIndex);
+		}
+
+		public static double DiscountedPrice(Coupon coupon, double OriginalOrderTotal)
+		{
+			if(coupon == null)
+			{
+				return OriginalOrderTotal;
+			}
+			else
+			{
+				if(coupon.MinimumAmount > OriginalOrderTotal)
+				{
+					return OriginalOrderTotal;
+				}
+				else
+				{
+					//everything is valid
+					if(Convert.ToInt32(coupon.CouponType) == (int)Coupon.ECouponType.Dollar)
+					{
+						//$ 10 OFF $100
+						return Math.Round(OriginalOrderTotal - coupon.Discount, 2);
+					}
+			
+					if (Convert.ToInt32(coupon.CouponType) == (int)Coupon.ECouponType.Percent)
+					{
+						//10% OFF $100
+						return Math.Round(OriginalOrderTotal - (OriginalOrderTotal * coupon.Discount/100), 2);
+
+					}
+					
+				}
+
+			}
+
+			return OriginalOrderTotal;
 		}
 
 

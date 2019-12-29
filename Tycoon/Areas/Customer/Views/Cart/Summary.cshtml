@@ -1,0 +1,157 @@
+﻿@model Tycoon.Models.ViewModels.OrderDetailsCart
+@using Tycoon.Utility
+@{
+    ViewData["Title"] = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    @if (Model.listCart.Count > 0)
+    {
+        <br />
+        <input id="UserId" asp-for="@Model.listCart[0].UserId" hidden />
+        <div class="backgroundwhiteBorder">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-info text-white ml-0 row container">
+                        <div class="col-6">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                            Booking Summary
+                        </div>
+                        <div class="col-6 text-right">
+                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index"
+                               class="btn btn-outline-dark btn-light bt-sm">
+                                Back to Booking List
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container rounded p-2">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 pb-4">
+                                    <div class="row">
+                                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-info">Service Delivery Details:</span>
+                                        </h4>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.Order.PickupName" type="text"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.Order.PickupNumber" type="text"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Date</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.Order.PickupDate" type="text"
+                                                   value="" id="datePicker" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Time</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.Order.PickupTime" type="text"
+                                                   value="" id="timePicker" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Additional Instructions</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <textarea asp-for="@Model.Order.Comments"
+                                                      style="height:100px;" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5 offset-lg-1">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-info">Booking Summary:</span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                        @{ var total = 0.0; }
+                                        @foreach (var details in Model.listCart)
+                                        {
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="my-0">@details.Service.Name</h6>
+                                                    <small class="text-muted">Quantity: @details.Count</small>
+                                                </div>
+                                                <span class="text-muted">$@(details.Service.Price * details.Count)</span>
+                                                @{ total += (details.Service.Price * details.Count); }
+                                            </li>
+                                        }
+                                        @if (Model.Order.CouponCode != null)
+                                        {
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <div class="text-success">
+                                                    <h6 class="my-0">Promo Code</h6>
+                                                    <small class="text-success">@Model.Order.CouponCode</small>
+                                                </div>
+                                                <span class="text-success">-$@(total - Model.Order.OrderTotal)</span>
+                                            </li>
+                                        }
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <small class="text-info">Total (CAD)</small>
+                                            <strong class="text-info">$@(Model.Order.OrderTotal)</strong>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="backgroundwhiteBorder"> No Services added to the Booking list </div>
+    }
+</form>
+
+@section Scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script>
+        $(function () {
+            $("#datePicker").datepicker({ minDate: "+3D", maxDate: "+2M" });
+            $("#timePicker").timepicker({
+                defaultTime: '11',
+                minTime: "11:00AM",
+                maxTime: "6:00PM",
+                interval: "60",
+                dropdown: true,
+                scrollbar: true
+            });
+
+        });
+    </script>
+}
+
