@@ -204,11 +204,12 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Coupon\D
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ThumbnailAreaPartial.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\User\Index.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\Details.cshtml.g.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\EntityFramework.dll
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\System.Web.Providers.dll
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Index.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Summary.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.cache
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
+D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Stripe.net.dll

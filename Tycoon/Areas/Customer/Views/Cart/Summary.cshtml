@@ -1,5 +1,8 @@
 ﻿@model Tycoon.Models.ViewModels.OrderDetailsCart
-@using Tycoon.Utility
+@using Microsoft.Extensions.Options
+
+@inject IOptions<Tycoon.Utility.StripeSettings> Stripe
+
 @{
     ViewData["Title"] = "Summary";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,7 +42,7 @@
                                             <label>Name</label>
                                         </div>
                                         <div class="col-9">
-                                            <input asp-for="@Model.Order.PickupName" type="text"
+                                            <input asp-for="@Model.Order.PickupName" id="txtName" type="text"
                                                    class="form-control" />
                                         </div>
                                     </div>
@@ -48,7 +51,7 @@
                                             <label>Phone</label>
                                         </div>
                                         <div class="col-9">
-                                            <input asp-for="@Model.Order.PickupNumber" type="text"
+                                            <input asp-for="@Model.Order.PickupNumber" id="txtPhone" type="text"
                                                    class="form-control" />
                                         </div>
                                     </div>
@@ -111,13 +114,9 @@
                                             <small class="text-info">Total (CAD)</small>
                                             <strong class="text-info">$@(Model.Order.OrderTotal)</strong>
                                         </li>
-
-
                                     </ul>
                                 </div>
                             </div>
-
-
                         </div>
                         <div>
 
@@ -125,7 +124,35 @@
 
                     </div>
                     <div class="card-footer">
+                        <div class="row" >
+                            <div class="col-12 col-md-4 offset-md-8">
 
+                                @{
+                                    var OrderTotalForStripe = Model.Order.OrderTotal * 100;
+
+                                }
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="@Stripe.Value.PublishableKey"
+                                        data-amount="@OrderTotalForStripe"
+                                        data-name="Tycoon Services"
+                                        data-label="Book Service"
+                                        data-description="Get that done right way!!"
+                                        data-locale="auto"
+                                        data-allow-remember-me="false"
+                                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                        >
+                                </script>
+                                <script>
+                                    document.getElementsByClassName("stripe-button-el")[0].style.display = "none";
+                                </script>
+                                <button type="submit" id="placeOrder"
+                                        value="Complete Booking"
+                                        class="btn btn-success form-control"
+                                        onclick="return validateInput()">
+                                    Complete Booking
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -152,6 +179,39 @@
             });
 
         });
+
+       
+
+        function validateInput() {
+
+            var name = document.getElementById("txtName").value;
+            var phone = document.getElementById("txtPhone").value;
+            var date = document.getElementById("datePicker").value;
+            var time = document.getElementById("timePicker").value;
+
+            if (name.toString() == '') {
+                alert("Please enter Name");
+                return false;
+            } else {
+                if (phone.toString() == '') {
+                    alert("Please enter Phone Number");
+                    return false;
+                } else {
+                    if (date.toString() == '') {
+                        alert("Please select date");
+                        return false;
+                    } else {
+                        if (time.toString() == '') {
+                            alert("Please select time");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        }
     </script>
 }
 
