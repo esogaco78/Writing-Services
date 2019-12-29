@@ -213,3 +213,5 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.c
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Stripe.net.dll
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Order\Confirm.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_IndividualBookingDetails.cshtml.g.cs

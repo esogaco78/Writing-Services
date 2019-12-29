@@ -1,0 +1,38 @@
+﻿@model Tycoon.Models.ViewModels.OrderDetailsViewModel
+
+@{
+    ViewData["Title"] = "Confirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div class="backgroundwhite" >
+    <div class="row px-3">
+        <div class="col-8" >
+            <h2 class="text-info" >Order Confirmation Details</h2>
+        </div>
+        <div class="col-4 text-right">
+            <a asp-action="Index" 
+               asp-controller="Home" 
+               asp-area="Customer" class="btn btn-success form-control">
+                New Booking
+            </a>
+        </div>
+    </div>
+
+    @if(Model.Order != null){
+        <div style="color:maroon" class="p-3" >
+            Your booking has been confirmed. Please see the boking summary below.
+            <br/>
+            Please feel free to contact us if you have any questions
+        </div>
+        <partial name="_IndividualBookingDetails" model="@Model" />
+    }
+    else
+    {
+        <div class="text-danger">
+            Error.. please try again
+        </div>
+    }
+</div>
+

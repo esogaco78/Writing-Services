@@ -68,8 +68,15 @@ namespace Tycoon.Areas.Customer.Controllers
                     .Where(c => c.Name.ToLower() == 
                     cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
 
-                cartDetails.Order.OrderTotal = 
-                    StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotal);
+                if (couponFromDb != null)
+                {
+                    cartDetails.Order.OrderTotal =
+                    StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotalOriginal);
+                }
+                else
+                {
+                    HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
+                }
             }
 
             return View(cartDetails);
@@ -115,9 +122,17 @@ namespace Tycoon.Areas.Customer.Controllers
                     db.Coupon
                     .Where(c => c.Name.ToLower() ==
                     cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
+                if(couponFromDb != null)
+                {
+                    cartDetails.Order.OrderTotal =
+                    StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotalOriginal);
+                }
+                else
+                {
+                    HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
+                }
 
-                cartDetails.Order.OrderTotal =
-                    StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotal);
+                
             }
 
             return View(cartDetails);
@@ -174,8 +189,15 @@ namespace Tycoon.Areas.Customer.Controllers
                     .Where(c => c.Name.ToLower() ==
                     cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
 
-                cartDetails.Order.OrderTotal =
-                    StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotal);
+                if (couponFromDb != null)
+                {
+                    cartDetails.Order.OrderTotal =
+                    StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotalOriginal);
+                }
+                else
+                {
+                    HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
+                }
             }
             else
             {
@@ -222,8 +244,8 @@ namespace Tycoon.Areas.Customer.Controllers
             }
 
             await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
-            //return RedirectToAction("Confirm", "Order", new { id = cartDetails.Order.Id });
+            // return RedirectToAction("Index", "Home");
+            return RedirectToAction("Confirm", "Order", new { id = cartDetails.Order.Id });
 
 
         }
@@ -234,7 +256,19 @@ namespace Tycoon.Areas.Customer.Controllers
             {
                 cartDetails.Order.CouponCode = "";
             }
-            HttpContext.Session.SetString(StaticDetail.ssCouponCode, cartDetails.Order.CouponCode);
+            var couponFromDb = 
+                   db.Coupon
+                   .Where(c => c.Name.ToLower() ==
+                   cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
+            if(couponFromDb != null)
+            {
+                HttpContext.Session.SetString(StaticDetail.ssCouponCode, cartDetails.Order.CouponCode);
+            }
+            else
+            {
+                HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
+                cartDetails.Order.CouponCode = "";
+            }
 
             return RedirectToAction(nameof(Index));
         }

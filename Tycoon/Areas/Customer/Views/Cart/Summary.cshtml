@@ -107,7 +107,7 @@
                                                     <h6 class="my-0">Promo Code</h6>
                                                     <small class="text-success">@Model.Order.CouponCode</small>
                                                 </div>
-                                                <span class="text-success">-$@(total - Model.Order.OrderTotal)</span>
+                                                <span class="text-success">-$@(Model.Order.OrderTotalOriginal - Model.Order.OrderTotal)</span>
                                             </li>
                                         }
                                         <li class="list-group-item d-flex justify-content-between">
