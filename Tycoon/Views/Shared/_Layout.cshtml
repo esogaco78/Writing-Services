@@ -60,6 +60,51 @@
                                 </div>
                             </li>
                         }
+
+                        @if (User.IsInRole(StaticDetail.ManagerUser) || User.IsInRole(StaticDetail.CustomerEndUser)
+                            || User.IsInRole(StaticDetail.CustomerSupportUser) ||
+                            User.IsInRole(StaticDetail.WritingUser))
+                        {
+
+                            <li class="text-black-50">
+                                <a asp-area="Customer"
+                                   asp-controller="Order"
+                                   asp-action="OrderHistory" class="nav-link text-dark">
+                                    Order History
+                                </a>
+                            </li>
+
+                        }
+
+                        @if (User.IsInRole(StaticDetail.ManagerUser) || User.IsInRole(StaticDetail.CustomerSupportUser) ||
+                            User.IsInRole(StaticDetail.WritingUser))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark"
+                                   href="#" id="navbarDropDown"
+                                   role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Order
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                                    @if (User.IsInRole(StaticDetail.ManagerUser) || User.IsInRole(StaticDetail.WritingUser))
+                                    {
+                                        <a class="dropdown-item"
+                                           asp-action="ManageOrder"
+                                           asp-controller="Order"
+                                           asp-area="Customer">Manage Order</a>
+                                    }
+                                    @if (User.IsInRole(StaticDetail.ManagerUser) || User.IsInRole(StaticDetail.CustomerSupportUser))
+                                    {
+                                        <a class="dropdown-item"
+                                           asp-action="OrderPickup"
+                                           asp-controller="Order"
+                                           asp-area="Customer">Order Pickup</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+
                         @if (HttpContextAccessor.HttpContext.Session.GetInt32(@StaticDetail.ssServicesCount) != null)
                         {
                             <li class="text-black-50">

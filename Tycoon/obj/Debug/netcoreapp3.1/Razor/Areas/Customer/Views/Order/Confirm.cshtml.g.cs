@@ -27,7 +27,7 @@ using Tycoon.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c131c1d4779c4ec6eb0f006e56f417d900b6c468", @"/Areas/Customer/Views/Order/Confirm.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"239899a5d1ed9d4445c0d6c1c2b12f17aa0552b0", @"/Areas/Customer/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ab9af8b4f319a5316c36e8a6a836c1cc00e4742c", @"/Areas/Customer/Views/_ViewImports.cshtml")]
     public class Areas_Customer_Views_Order_Confirm : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Tycoon.Models.ViewModels.OrderDetailsViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

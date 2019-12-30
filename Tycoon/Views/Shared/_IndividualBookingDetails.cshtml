@@ -1,6 +1,9 @@
 ﻿@model Tycoon.Models.ViewModels.OrderDetailsViewModel
+@using Tycoon.Utility
 
-<form method="post">
+<form  asp-action="OrderPickup" asp-controller="Order" asp-area="Customer"
+      asp-route-orderId="@Model.Order.Id"
+      method="post">
     <div class="container row border ml-1 backgroundwhiteBorder10Padding" style="width:100%">
         <div class="col-lg-8 col-12" style="border-right: 1px solid #bbb9b9">
             <br />
@@ -55,7 +58,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-12" >
+        <div class="col-lg-4 col-12">
             <h4 class="d-flex justify-content-between align-content-center mt-3 mb-3">
                 <span class="text-muted"> Order ID: </span>
                 <span class="badge badge-secondary badge-pill">@Model.Order.Id</span>
@@ -76,21 +79,36 @@
                 @if (Model.Order.CouponCode != null)
                 {
                     <li class="list-group-item d-flex justify-content-between">
-                        <div class="text-success" >
+                        <div class="text-success">
                             <h6 class="my-0">Promo Code</h6>
                             <small>@Model.Order.CouponCode</small>
                         </div>
                         <span class="text-success">@Model.Order.CouponCodeDiscount</span>
                     </li>
                 }
-                <li class="list-group-item d-flex justify-content-between bg-light"  >
+                <li class="list-group-item d-flex justify-content-between bg-light">
                     <span class="text-info">Total (CAD)</span>
                     <strong class="text-info">$@Model.Order.OrderTotal</strong>
                 </li>
 
 
             </ul>
-            <button type="submit" disabled class="btn btn-info form-control" style="background-color:cadetblue" >@Model.Order.Status</button>
+            @if (Model.Order.Status.Equals(StaticDetail.StatusReady) &&
+              (User.IsInRole(StaticDetail.ManagerUser) || User.IsInRole(StaticDetail.CustomerSupportUser)))
+            {
+                <button type="submit" class="btn btn-success form-control"
+                         >
+                    <i class="far fa-thumbs-up"></i> Confirm Delivery
+                </button>
+            }
+            else
+            {
+                <button type="submit" disabled class="btn btn-info form-control"
+                        style="background-color:cadetblue">
+                    @Model.Order.Status
+                </button>
+            }
+
         </div>
 
     </div>

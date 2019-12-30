@@ -19,6 +19,7 @@ namespace Tycoon.Areas.Customer.Controllers
     public class CartController : Controller
     {
         public readonly ApplicationDbContext db;
+        // private OrderDetailsViewModel individualOrder;
 
         [BindProperty]
         public OrderDetailsCart cartDetails { get; set; }
@@ -118,10 +119,7 @@ namespace Tycoon.Areas.Customer.Controllers
             if (HttpContext.Session.GetString(StaticDetail.ssCouponCode) != null)
             {
                 cartDetails.Order.CouponCode = HttpContext.Session.GetString(StaticDetail.ssCouponCode);
-                var couponFromDb = await
-                    db.Coupon
-                    .Where(c => c.Name.ToLower() ==
-                    cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
+                var couponFromDb = await db.Coupon.Where(c => c.Name.ToLower() == cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
                 if(couponFromDb != null)
                 {
                     cartDetails.Order.OrderTotal =
@@ -184,20 +182,12 @@ namespace Tycoon.Areas.Customer.Controllers
             if (HttpContext.Session.GetString(StaticDetail.ssCouponCode) != null)
             {
                 cartDetails.Order.CouponCode = HttpContext.Session.GetString(StaticDetail.ssCouponCode);
-                var couponFromDb = await
-                    db.Coupon
-                    .Where(c => c.Name.ToLower() ==
+                var couponFromDb = await db.Coupon.Where(c => c.Name.ToLower() ==
                     cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
 
-                if (couponFromDb != null)
-                {
                     cartDetails.Order.OrderTotal =
                     StaticDetail.DiscountedPrice(couponFromDb, cartDetails.Order.OrderTotalOriginal);
-                }
-                else
-                {
                     HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
-                }
             }
             else
             {
@@ -212,12 +202,14 @@ namespace Tycoon.Areas.Customer.Controllers
 
             await db.SaveChangesAsync();
 
+            var testc = cartDetails.Order.OrderTotal * 100;
+
             var options = new ChargeCreateOptions
             {
                 Amount = Convert.ToInt32(cartDetails.Order.OrderTotal * 100),
                 Currency = "cad",
                 Description = "Order ID: " + cartDetails.Order.Id,
-                SourceId = stripeToken,
+                SourceId = stripeToken
 
             };
 
@@ -252,14 +244,17 @@ namespace Tycoon.Areas.Customer.Controllers
 
         public IActionResult AddCoupon()
         {
-            if(cartDetails.Order.CouponCode == null)
+            var couponFromDb =
+                  db.Coupon.FirstAsync(c => c.Name.ToLower() ==
+                  cartDetails.Order.CouponCode.ToLower());
+
+
+            if (cartDetails.Order.CouponCode == null)
             {
                 cartDetails.Order.CouponCode = "";
+                HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
             }
-            var couponFromDb = 
-                   db.Coupon
-                   .Where(c => c.Name.ToLower() ==
-                   cartDetails.Order.CouponCode.ToLower()).FirstOrDefaultAsync();
+           
             if(couponFromDb != null)
             {
                 HttpContext.Session.SetString(StaticDetail.ssCouponCode, cartDetails.Order.CouponCode);
@@ -323,5 +318,6 @@ namespace Tycoon.Areas.Customer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        
     }
 }

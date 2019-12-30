@@ -1,0 +1,91 @@
+﻿@model List<Tycoon.Models.ViewModels.OrderDetailsViewModel>
+@using Tycoon.Utility
+@{
+    ViewData["Title"] = "ManageOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info" >Manage Order's</h2>
+<form method="post">
+    <br/>
+    @if (Model.Count>0)
+    {
+        <div class="container row bg-white p-2 border mb-3 rounded">
+            @foreach(var item in Model)
+            {
+                <div class="col-12 pt-1 " >
+                    <div class="backgroundwhiteBorder" style="padding:10px">
+                        <div class="row">
+                            <div class="col-4">
+                                Order Number: @item.Order.Id
+                                <ul class="text-info">
+                                    @foreach (var details in item.OrderDetails)
+                                    {
+                                        <li>@details.ServiceName x @details.Count</li>
+                                    }
+                                </ul>  
+                            </div>
+                            <div class="col-4 pb-2">
+                                <div class="input-group pb-2">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Time</span>
+                                    </div>
+                                    <input type="text" class="border rounded form-control"
+                                           readonly value="@item.Order.PickupTime"/>
+                                </div>
+                                @{ var comments = item.Order.Comments;
+
+                                    if(comments == null || comments.Trim().Length == 0)
+                                    {
+                                        item.Order.Comments = "No Instructions";
+                                    }
+
+                                    }
+                                <textarea asp-for="@item.Order.Comments" readonly 
+                                          class="rounded border form-control"
+                                          style="width:100%" ></textarea>
+                            </div>
+                            <div class="col-3 offset-1 d-flex align-content-center">
+                                @if (item.Order.Status.Equals(StaticDetail.StatusSubmitted))
+                                {
+                                    <div class="col-12">
+                                        <button type="submit" asp-action="WorkOrder"
+                                                asp-route-orderId="@item.Order.Id"
+                                                class="btn btn-info form-control mb-3">
+                                            <i class="fas fa-check"> </i> &nbsp; Start Working
+                                        </button>
+                                        <button type="submit" asp-action="CancelOrder"
+                                                asp-route-orderId="@item.Order.Id"
+                                                class="btn btn-danger form-control mb-3">
+                                            <i class="fas fa-times"> </i> &nbsp; Cancel Order
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    @if (item.Order.Status.Equals(StaticDetail.StatusInProgress))
+                                    {
+                                        <div class="col-12">
+                                            <button type="submit" asp-action="OrderReady"
+                                                    asp-route-orderId="@item.Order.Id"
+                                                    class="btn btn-success form-control mb-3">
+                                                <i class="fas fa-flag-checkered"></i> &nbsp; Service Ready
+                                            </button>
+                                            <button type="submit" asp-action="CancelOrder"
+                                                    asp-route-orderId="@item.Order.Id"
+                                                    class="btn btn-danger form-control mb-3">
+                                                <i class="fas fa-times"> </i> &nbsp; Cancel Order
+                                            </button>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</form>
+

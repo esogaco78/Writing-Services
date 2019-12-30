@@ -122,3 +122,9 @@ body {
     background-color: white;
     opacity: 1;
 }
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 70%;
+    }
+}

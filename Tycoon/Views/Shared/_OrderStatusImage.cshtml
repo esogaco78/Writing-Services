@@ -1,0 +1,25 @@
+﻿@model Tycoon.Models.ViewModels.OrderDetailsViewModel
+@using Tycoon.Utility
+
+    <div style="width:100%">
+        @if (Model.Order.Status == StaticDetail.StatusSubmitted)
+        {
+            <img src="~/images/OrderPlaced.png" width="100%">
+        }
+
+        @if (Model.Order.Status == StaticDetail.StatusInProgress)
+        {
+            <img src="~/images/InProgress.png" width="100%">
+        }
+
+        @if (Model.Order.Status == StaticDetail.StatusReady)
+        {
+            <img src="~/images/ReadyToDeliver.png" width="100%">
+        }
+
+        @if (Model.Order.Status == StaticDetail.StatusCompleted)
+        {
+            <img src="~/images/completed.png" width="100%">
+        }
+    </div>
+

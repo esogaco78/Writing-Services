@@ -27,6 +27,11 @@ namespace Tycoon.Utility
 		public const string PaymentStatusApproved = "Approved";
 		public const string PaymentStatusRejected = "Rejected";
 
+	/*	public const string InProgressImage = "InProgress.png";
+		public const string OrderPlacedImage = "OrderPlaced.png";
+		public const string ReadyToDeliver = "ReadyToDeliver.png";
+		public const string Completed = "completed.png";*/
+
 
 		public static string ConvertToRawHtml(string source)
 		{
