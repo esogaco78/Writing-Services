@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tycoon.Data;
@@ -18,11 +19,13 @@ namespace Tycoon.Areas.Customer.Controllers
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext db;
+        private readonly IEmailSender _emailSender;
         private int PageSize = 2;
 
-        public OrderController(ApplicationDbContext appDb)
+        public OrderController(ApplicationDbContext appDb, IEmailSender emailSender)
         {
             db = appDb;
+            _emailSender = emailSender;
         }
 
         [Authorize]
@@ -156,6 +159,11 @@ namespace Tycoon.Areas.Customer.Controllers
 
             await db.SaveChangesAsync();
 
+            await _emailSender
+                    .SendEmailAsync(db.Users.Where(u => u.Id == order.UserId).FirstOrDefault().Email,
+                    " Tycoon - Service request ready to deliver " + order.Id.ToString(),
+                    " Your writing service request has been completed. Please get in touch with our customer support.");
+
             return RedirectToAction(nameof(ManageOrder));
 
             //Email logic to notify user
@@ -169,6 +177,10 @@ namespace Tycoon.Areas.Customer.Controllers
             order.Status = StaticDetail.StatusCancelled;
 
             await db.SaveChangesAsync();
+            await _emailSender
+                    .SendEmailAsync(db.Users.Where(u => u.Id == order.UserId).FirstOrDefault().Email,
+                    " Tycoon - Service request has been Cancelled " + order.Id.ToString(),
+                    " Your writing service request has been cancelled!!");
 
             return RedirectToAction(nameof(ManageOrder));
         }
@@ -281,6 +293,11 @@ namespace Tycoon.Areas.Customer.Controllers
             order.Status = StaticDetail.StatusCompleted;
 
             await db.SaveChangesAsync();
+
+            await _emailSender
+                    .SendEmailAsync(db.Users.Where(u => u.Id == order.UserId).FirstOrDefault().Email,
+                    " Tycoon - Service request has been Completed. " + order.Id.ToString(),
+                    " Your writing service request has been completed. Wish to see you again!");
 
             return RedirectToAction(nameof(OrderPickup));
         }

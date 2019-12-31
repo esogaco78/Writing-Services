@@ -39,13 +39,21 @@ namespace Tycoon
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
             services.AddControllersWithViews();
             services.AddRazorPages();
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Identity/Account/Login";
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "471565383547569";
+                facebookOptions.AppSecret = "31710e551f2add98b76e5acdda935358";
             });
             services.AddSession(options =>
             {
@@ -76,6 +84,7 @@ namespace Tycoon
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();

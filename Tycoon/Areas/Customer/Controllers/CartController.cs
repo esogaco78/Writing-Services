@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Tycoon.Models;
 using Stripe;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Tycoon.Areas.Customer.Controllers
 {
@@ -19,14 +20,16 @@ namespace Tycoon.Areas.Customer.Controllers
     public class CartController : Controller
     {
         public readonly ApplicationDbContext db;
+        private readonly IEmailSender _emailSender;
         // private OrderDetailsViewModel individualOrder;
 
         [BindProperty]
         public OrderDetailsCart cartDetails { get; set; }
 
-        public CartController(ApplicationDbContext appDb)
+        public CartController(ApplicationDbContext appDb, IEmailSender emailSender)
         {
             db = appDb;
+            _emailSender = emailSender;
         }
 
         [Authorize]
@@ -227,12 +230,17 @@ namespace Tycoon.Areas.Customer.Controllers
 
             if(charge.Status.ToLower() == "succeeded")
             {
+                await _emailSender
+                    .SendEmailAsync(db.Users.Where(u => u.Id == claim.Value).FirstOrDefault().Email,
+                    " Tycoon - Service has been booked " + cartDetails.Order.Id.ToString(),
+                    " Your writing service request has been received. Please login to your account to track the order!");
                 cartDetails.Order.PaymentStatus = StaticDetail.PaymentStatusApproved;
                 cartDetails.Order.Status = StaticDetail.StatusSubmitted;
             }
             else
             {
                 cartDetails.Order.PaymentStatus = StaticDetail.PaymentStatusRejected;
+                cartDetails.Order.Status = StaticDetail.StatusCancelled;
             }
 
             await db.SaveChangesAsync();
@@ -244,27 +252,16 @@ namespace Tycoon.Areas.Customer.Controllers
 
         public IActionResult AddCoupon()
         {
-            var couponFromDb =
-                  db.Coupon.FirstAsync(c => c.Name.ToLower() ==
-                  cartDetails.Order.CouponCode.ToLower());
-
+           
 
             if (cartDetails.Order.CouponCode == null)
             {
                 cartDetails.Order.CouponCode = "";
                 HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
-            }
-           
-            if(couponFromDb != null)
-            {
-                HttpContext.Session.SetString(StaticDetail.ssCouponCode, cartDetails.Order.CouponCode);
-            }
-            else
-            {
-                HttpContext.Session.SetString(StaticDetail.ssCouponCode, string.Empty);
-                cartDetails.Order.CouponCode = "";
-            }
-
+            }   
+            
+            HttpContext.Session.SetString(StaticDetail.ssCouponCode, cartDetails.Order.CouponCode);
+  
             return RedirectToAction(nameof(Index));
         }
 

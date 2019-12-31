@@ -209,8 +209,6 @@ D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\EntityFramework.dll
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\System.Web.Providers.dll
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Index.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Summary.cshtml.g.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
-D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
 D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Stripe.net.dll
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Order\Confirm.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_IndividualBookingDetails.cshtml.g.cs
@@ -219,3 +217,9 @@ D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_OrderStatusI
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Order\ManageOrder.cshtml.g.cs
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.csprojAssemblyReference.cache
 D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Order\OrderPickup.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Facebook.dll
+D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\UserName\Default.cshtml.g.cs
+D:\ASPNET\Tycoon\Tycoon\bin\Debug\netcoreapp3.1\SendGrid.dll
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cs
+D:\ASPNET\Tycoon\Tycoon\obj\Debug\netcoreapp3.1\Tycoon.MvcApplicationPartsAssemblyInfo.cache
