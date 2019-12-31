@@ -52,8 +52,8 @@ namespace Tycoon
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
-                facebookOptions.AppId = "471565383547569";
-                facebookOptions.AppSecret = "31710e551f2add98b76e5acdda935358";
+                facebookOptions.AppId = "useFbAppId";
+                facebookOptions.AppSecret = "useFbAppSecretId";
             });
             services.AddSession(options =>
             {
